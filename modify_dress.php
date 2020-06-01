@@ -1,12 +1,14 @@
-
-<?php $page_title = 'Modify Dress'; ?>
-<?php $page_title = 'Project ABCD > Modify Dresses'; ?>
 <?php 
+    $status = session_status();
+    if ($status == PHP_SESSION_NONE) {
+        session_start();
+    }
     require 'bin/functions.php';
     require 'db_configuration.php';
     include('header.php'); 
-    $page="list_dresses.php";
-    //verifyLogin($page);
+    $page_title = 'Project ABCD > Modify Dresses';
+    $page="modify_dress.php";
+    verifyLogin($page);
  
 ?>
 <html>
@@ -28,6 +30,10 @@
   text-align: center;
   font-family: "Times New Roman";
 }
+
+#guidance {
+        color: grey;
+        font-size: 10px;
 </style>
 <div class="container">
 <style>#title {text-align: center; color: darkgoldenrod;}</style>
@@ -116,12 +122,12 @@ if ($result->num_rows > 0) {
       </div>
           
       <div>
-        <label for="category">Category</label>
+        <label for="category">Category</label> <label id="guidance"> (regional, religious, people, dresses, festivals, other)</label><br>
         <input type="text" class="form-control" name="category" value="'.$row["category"].'"  maxlength="255" style=width:400px ><br>
       </div>
 
       <div>
-        <label for="type">Type</label>
+        <label for="type">Type</label> <label id="guidance"> (boys, girls, men, women, other)</label> <br>
         <input type="text" class="form-control" name="type" value="'.$row["type"].'"  maxlength="255" style=width:400px required><br>
       </div>
 
